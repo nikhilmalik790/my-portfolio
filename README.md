@@ -4,9 +4,9 @@
 A modern, responsive personal portfolio website built using HTML, CSS, and Vanilla JavaScript.  
 It showcases my skills, projects, profile, and contact information with a clean UI, glassmorphism styling, animated backgrounds, and interactive elements.
 
-## 🌐 Live Portfolio
+## 🌐 Portfolio
 
-🔗 **Visit my portfolio:** [Add your live portfolio link here]
+🔗 **Visit my portfolio:** [Hi! 👋](https://my-portfolio-ten-ashy-30.vercel.app/)
 
 ---
 
