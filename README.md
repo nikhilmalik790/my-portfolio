@@ -6,7 +6,7 @@ It showcases my skills, projects, profile, and contact information with a clean 
 
 ## 🌐 Portfolio
 
-🔗 **Visit my portfolio:** [Hi! 👋](https://my-portfolio-ten-ashy-30.vercel.app/)
+🔗 **Visit my portfolio:** [ Hi!👋](https://my-portfolio-ten-ashy-30.vercel.app/)
 
 ---
 
