@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Nikhil Malik — Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+ 
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">NM<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- TOP BANNER: avatar + background word only -->
+  <section class="banner" id="home">
+    <div class="banner-bg-text" aria-hidden="true"><span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></div>
+
+    <div class="banner-avatar">
+      <div class="avatar-glow"></div>
+      <div class="avatar-float">
+        <!-- 3D avatar: replace assets/Avatar.png to change it -->
+        <img src="assets/Avatar.png" alt="Nikhil Malik 3D avatar" class="avatar-img" />
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      <div class="sc-line"></div>
+    </div>
+  </section>
+
+  <!-- INTRO: text + photo -->
+  <section class="intro" id="intro">
+    <div class="intro-inner">
+      <div class="hero-left">
+        <p class="hero-greeting" data-reveal>Hey, I'm</p>
+        <h1 class="hero-name" data-reveal>
+          <span class="name-line">Nikhil</span>
+          <span class="name-line accent-line">Malik</span>
+        </h1>
+        <div class="hero-role" data-reveal>
+          <span class="role-track">
+            <span id="roleText">Web Developer</span>
+            <span class="cursor-blink">|</span>
+          </span>
+        </div>
+        <p class="hero-bio" data-reveal>
+          Building modern web experiences with clean code and thoughtful design. Turning Ideas into Reality with Code, Creativity & AI.
+        </p>
+        <div class="hero-actions" data-reveal>
+          <a href="#projects" class="btn-main">See my work</a>
+          <a href="#contact" class="btn-line">Say hello</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="photo-stage">
+          <!-- your photo: uses assets/photo.png (transparent) when present, otherwise photo.jpg -->
+          <picture>
+            <source srcset="assets/photo.jpg" type="image/png" />
+            <img src="assets/photo.jpg" alt="Nikhil Malik" class="photo-img" />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-label">About</div>
+      <div class="about-layout">
+        <div class="about-text">
+          <h2 class="section-heading">Who I am</h2>
+          <!-- EDIT: your bio -->
+          <p>I'm Nikhil Malik — a Web Developer who loves turning ideas into reality through code, AI, and a little creative chaos. I build modern, user-friendly web experiences, vibe-code, experiment with Generative AI, and explore tools like Mixpanel & WebEngage to understand users better. Always curious, always creating, and always exploring what's next.</p>
+          <div class="about-links">
+            <a href="https://github.com/nikhilmalik790" target="_blank" class="about-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/>
+              </svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/nikhil-malik-41ba5a327" target="_blank" class="about-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-label">Skills</div>
+      <h2 class="section-heading">What I work with</h2>
+    </div>
+    <div class="skills-track-wrap">
+      <div class="skills-track" id="skillsTrack">
+        <!-- EDIT: add/remove skills here (duplicated below for infinite scroll) -->
+        <span class="sk">HTML5</span>
+        <span class="sk">CSS3</span>
+        <span class="sk">JavaScript</span>
+        <span class="sk">React</span>
+        <span class="sk">Node.js</span>
+        <span class="sk">Python</span>
+        <span class="sk">Git & GitHub</span>
+        <span class="sk">REST APIs</span>
+        <span class="sk">Responsive Design</span>
+        <span class="sk">Tailwind CSS</span>
+        <span class="sk">TypeScript</span>
+        <span class="sk">MongoDB</span>
+        <!-- duplicate for seamless loop -->
+        <span class="sk">HTML5</span>
+        <span class="sk">CSS3</span>
+        <span class="sk">JavaScript</span>
+        <span class="sk">React</span>
+        <span class="sk">Node.js</span>
+        <span class="sk">Python</span>
+        <span class="sk">Git & GitHub</span>
+        <span class="sk">REST APIs</span>
+        <span class="sk">Responsive Design</span>
+        <span class="sk">Tailwind CSS</span>
+        <span class="sk">TypeScript</span>
+        <span class="sk">MongoDB</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-label">Projects</div>
+      <h2 class="section-heading">Things I've built</h2>
+
+      <div class="projects-grid">
+
+<!--ADD NEW PROJECT-->
+
+        <article class="pcard pcard-featured">
+          <div class="pcard-top">
+            <span class="pcard-num">01</span>
+            <div class="pcard-links">
+              <!-- <a href="#" target="_blank" title="Live">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a> -->
+              <a href="https://github.com/nikhilmalik790/MovieRecommendation-WatchX" target="_blank" title="Code">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3>MovieRecommendation-WatchX</h3>
+          <p>A movie recommendation web application built to explore movie data, discover trending titles, and provide users with a seamless movie browsing experience.</p>
+          <div class="pcard-tags">
+            <span>HTML</span><span>CSS</span><span>Python</span>
+          </div>
+        </article>
+
+        <article class="pcard">
+          <div class="pcard-top">
+            <span class="pcard-num">02</span>
+            <div class="pcard-links">
+              <!-- <a href="#" target="_blank" title="Live">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a> -->
+              <a href="https://github.com/nikhilmalik790/Helphub" target="_blank" title="Code">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3>Helphub</h3>
+          <p>A support-focused web platform designed to connect people with the help and assistance they need through a simple and user-friendly experience.</p>
+          <div class="pcard-tags">
+            <span>HTML</span><span>CSS</span><span>Python</span>
+          </div>
+        </article>
+
+        <article class="pcard">
+          <div class="pcard-top">
+            <span class="pcard-num">03</span>
+            <div class="pcard-links">
+              <!-- <a href="#" target="_blank" title="Live">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a> -->
+              <a href="https://github.com/nikhilmalik790/bike_app" target="_blank" title="Code">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3>Bike_app</h3>
+          <p>BikeZone is a beginner-friendly Django web project that showcases popular bike brands and models.
+             It features user registration/login, company pages, bike model details with images, and access control to ensure only logged-in users can explore models.
+             Designed with a clean UI and background styling for visual appeal.</p>
+          <div class="pcard-tags">
+            <span>Python</span><span>Git</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <div class="contact-layout">
+        <div class="contact-left">
+          <h2 class="section-heading">Let's build<br><em>something together</em></h2>
+          <p class="contact-sub">Open for freelance, collaborations, or just a good conversation about code.</p>
+        </div>
+        <div class="contact-right">
+          <!-- EDIT: replace with your real email -->
+          <a href="mailto:your@email.com" class="clink">
+            <span class="clink-label">Email</span>
+            <span class="clink-val">nikhilmalik79062@email.com</span>
+            <svg class="clink-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://github.com/nikhilmalik790" target="_blank" class="clink">
+            <span class="clink-label">GitHub</span>
+            <span class="clink-val">nikhilmalik790</span>
+            <svg class="clink-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/nikhil-malik-41ba5a327" target="_blank" class="clink">
+            <span class="clink-label">LinkedIn</span>
+            <span class="clink-val">Nikhil Malik</span>
+            <svg class="clink-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Designed & built by Nikhil Malik · <span id="yr"></span></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
