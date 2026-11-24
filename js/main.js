@@ -24,11 +24,7 @@ class Particle {
     this.vx = (Math.random() - 0.5) * 0.25;
     this.vy = -(Math.random() * 0.3 + 0.1);
     this.alpha = Math.random() * 0.5 + 0.1;
-<<<<<<< HEAD
     this.color = Math.random() > 0.6 ? '#1D4A35' : '#F2462E';
-=======
-    this.color = Math.random() > 0.6 ? '#6366f1' : '#22d3ee';
->>>>>>> c1e2d327e73c31b7bdc371e28d79bcba3d66a76c
   }
   update() {
     // subtle mouse repulsion
@@ -67,11 +63,7 @@ function drawConnections() {
       if (d < 100) {
         ctx.save();
         ctx.globalAlpha = (1 - d/100) * 0.07;
-<<<<<<< HEAD
         ctx.strokeStyle = '#1D4A35';
-=======
-        ctx.strokeStyle = '#6366f1';
->>>>>>> c1e2d327e73c31b7bdc371e28d79bcba3d66a76c
         ctx.lineWidth = 0.5;
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
