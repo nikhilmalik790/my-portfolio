@@ -1,113 +1,112 @@
 # Nikhil Malik — Portfolio
 
-Glassmorphism + iOS-style personal portfolio.  
-Pure HTML, CSS, JS — no frameworks, no build tools needed.
+Personal portfolio website with a glassmorphism, iOS-inspired design.
+Built with plain HTML, CSS, and JavaScript. No frameworks or build tools.
 
----
+## Live Preview
 
-## 📁 Folder Structure
+Open `index.html` in a browser, or serve the folder with any static server.
+
+## Project Structure
 
 ```
 portfolio/
-├── index.html          ← Main page (edit content here)
+├── index.html          # Page content: banner, intro, about, skills, projects, contact
 ├── css/
-│   └── style.css       ← All styles (glassmorphism + iOS look)
+│   └── style.css       # All styles
 ├── js/
-│   └── main.js         ← Typewriter, scroll reveal, mobile menu
+│   └── main.js         # Particle background, typewriter, navbar, mobile menu, scroll reveal
 ├── assets/
-│   └── photo.jpg       ← ADD YOUR PHOTO HERE
+│   ├── Avatar.png      # 3D avatar shown in the top banner
+│   ├── Avatar1.png     # Alternate avatar
+│   └── photo.jpg       # Photo shown in the intro section
 └── README.md
 ```
 
----
+## Sections
 
-## ✏️ How to Update
+- **Banner:** Avatar with the "PORTFOLIO" background text
+- **Intro:** Name, rotating role text, short bio, and action buttons
+- **About:** Short bio and links to GitHub and LinkedIn
+- **Skills:** Scrolling list of technologies
+- **Projects:** Project cards with links to GitHub repositories
+- **Contact:** Email, GitHub, and LinkedIn links
 
-### 1. Add Your Photo
-- Put your photo in `assets/` folder named `photo.jpg`
-- Open `index.html`, find this line and uncomment it:
-  ```html
-  <img src="assets/photo.jpg" alt="Nikhil Malik" />
-  ```
+## Updating the Site
 
+### Intro and About text
+Edit the `<p>` elements in `index.html` under the `intro` and `about` sections.
 
-### 2. Update Bio
-- In `index.html`, find the `<!-- EDIT: Update this bio -->` comment
-- Change the `<p>` text in the About section
+### Rotating roles
+In `js/main.js`, edit the `roles` array:
 
-### 3. Update Email
-- Search for `your@email.com` in `index.html` and replace with your real email
+```js
+const roles = [
+  'Web Developer',
+  'Frontend Engineer',
+  'UI Enthusiast',
+  'Problem Solver',
+];
+```
 
-### 4. Update Skills
-- Find the `<!-- EDIT: Add/remove skills -->` comment
-- Add or remove `<div class="skill-pill">SkillName</div>` lines
-
-### 5. Update Typewriter Roles
-- In `js/main.js`, find the `roles` array at the top
-- Add/remove your roles:
-  ```js
-  const roles = ['Web Developer', 'React Dev', 'Your Role'];
-  ```
-
-### 6. Update Stats (About section)
-- Find the `<!-- EDIT: Update these numbers -->` comment
-- Change the numbers in `<span class="stat-num">`
-
----
-
-## ➕ How to Add a New Project
-
-Open `index.html`, find the Projects section.  
-Copy this block and paste it inside `<div class="projects-grid">`:
+### Skills
+In `index.html`, in the `skillsTrack` element, add or remove:
 
 ```html
-<div class="project-card glass-card">
-  <div class="project-top">
-    <div class="project-icon">🚀</div>  <!-- Change emoji -->
-    <div class="project-links">
-      <a href="YOUR_LIVE_URL" target="_blank" class="icon-link" title="Live Demo">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
-      </a>
-      <a href="YOUR_GITHUB_REPO_URL" target="_blank" class="icon-link" title="Code">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="16 18 22 12 16 6"/>
-          <polyline points="8 6 2 12 8 18"/>
-        </svg>
+<span class="sk">SkillName</span>
+```
+
+The list is duplicated for the seamless scroll loop, so add new skills to both copies.
+
+### Projects
+In `index.html`, copy an existing `<article class="pcard">` block and place it inside `<div class="projects-grid">`, above the `<!--ADD NEW PROJECT-->` comment. Update the title, description, GitHub link, and tags:
+
+```html
+<article class="pcard">
+  <div class="pcard-top">
+    <span class="pcard-num">04</span>
+    <div class="pcard-links">
+      <a href="YOUR_GITHUB_REPO_URL" target="_blank" title="Code">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       </a>
     </div>
   </div>
-  <h3 class="project-title">Your Project Name</h3>
-  <p class="project-desc">What does it do? Keep it 1–2 sentences.</p>
-  <div class="project-tags">
-    <span class="tag">React</span>
-    <span class="tag">Node.js</span>
+  <h3>Project Name</h3>
+  <p>One or two sentences describing the project.</p>
+  <div class="pcard-tags">
+    <span>React</span><span>Node.js</span>
   </div>
-</div>
+</article>
 ```
 
----
+To add a live demo link, uncomment the live-link `<a>` block in the card's `pcard-links` section and set its `href`.
 
-## 🌐 How to Host (Free)
+### Contact details
+In `index.html`, update the `clink` links in the contact section. The email link's `href` is currently `mailto:your@email.com`, while the displayed address is `nikhilmalik79062@email.com`. Make both match.
 
-**GitHub Pages (Easiest):**
-1. Push this folder to a GitHub repo named `username.github.io`
-2. Go to Settings → Pages → Source: main branch
-3. Your site will be live at `https://username.github.io`
+### Photos
+- Replace `assets/photo.jpg` to change the intro photo.
+- Replace `assets/Avatar.png` to change the banner avatar.
 
-**Netlify (Drag & drop):**
-1. Go to netlify.com
-2. Drag the entire `portfolio` folder onto the deploy zone
-3. Done — live in 10 seconds with a free URL
+## Customization
 
----
+In `css/style.css`:
+- `--accent: #7c6ff7` sets the primary accent color.
+- `--accent-2: #5aafff` sets the secondary accent color.
+- `.blob-1`, `.blob-2`, `.blob-3` set the background glow colors.
 
-## 🎨 Customization Tips
+## Hosting
 
-- **Change accent color:** In `css/style.css`, change `--accent: #7c6ff7` to any hex color
-- **Change second accent:** Change `--accent-2: #5aafff`
-- **Change blob colors:** Find `.blob-1`, `.blob-2`, `.blob-3` and update the radial-gradient colors
-- **Add more sections:** Follow the same `<section class="section" id="...">` pattern
+**GitHub Pages**
+1. Push this folder to a GitHub repository.
+2. Go to Settings → Pages and set the source to the `main` branch.
+3. The site will be available at `https://<username>.github.io/<repo>/`.
+
+**Netlify**
+1. Go to netlify.com.
+2. Drag the `portfolio` folder onto the deploy area.
+
+## Links
+
+- GitHub: https://github.com/nikhilmalik790
+- LinkedIn: https://www.linkedin.com/in/nikhil-malik-41ba5a327
