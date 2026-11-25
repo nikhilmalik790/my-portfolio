@@ -24,10 +24,9 @@
   --line:         rgba(29,74,53,0.14);
   --accent-glow:  rgba(242,70,46,0.35);
 
-  /* avatar size: one value drives the banner, the photo offset and the intro spacing */
-  --avatar-w:     min(92vw, 820px, 84svh);
-  --avatar-x:     0;      /* negative = left, positive = right */
-  --avatar-y:     -5svh;  /* negative = up */
+  /* banner avatar height: the banner grows to fit it, so its bottom edge is the avatars' bottom edge.
+     Kept a little shorter than the intro photo (.photo-stage, 480px wide). */
+  --avatar-h:     min(440px, 54svh);
 
   --radius:       20px;
   --font-head:    'Space Grotesk', sans-serif;
@@ -135,92 +134,95 @@ body {
 /* =============================================
    TOP BANNER — avatar + background word
    ============================================= */
+/* the banner is its own panel: rounded, inset from the page edges, with its own
+   bottom edge. The avatars are clipped by it, so they rise out of its bottom. */
 .banner {
   position: relative; z-index: 3;
-  min-height: 100vh;
-  min-height: 100svh;
+  margin: 72px 0 0;
   display: flex; align-items: flex-end; justify-content: center;
-  padding: 110px 1.25rem 0;
-  overflow: visible;
+  overflow: hidden;
+  container-type: inline-size;
+  /* same paper tone and soft tints as the page, so the banner flows into the intro */
   background:
-    radial-gradient(55% 45% at 50% 55%, rgba(242,70,46,0.12), transparent 70%),
-    radial-gradient(45% 35% at 15% 85%, rgba(29,74,53,0.10), transparent 70%);
+    radial-gradient(50% 60% at 50% 100%, rgba(242,70,46,0.10), transparent 70%),
+    radial-gradient(40% 50% at 12% 0%, rgba(29,74,53,0.08), transparent 70%),
+    var(--oat);
 }
 
-/* giant outlined background word, sits behind the avatar */
-/* letters spread edge to edge: starts at the top-left, ends at the top-right,
-   and sits across the upper part of the avatar */
+/* outlined background word: spans the full banner width, edge to edge */
 .banner-bg-text {
   position: absolute;
-  left: 2vw; right: 2vw;
-  top: calc(100% - var(--avatar-w) * 0.3 - 0.5em + var(--avatar-y));
-  display: flex; justify-content: space-between; align-items: center;
+  top: 1.2cqi;
+  left: 2.5cqi; right: 2.5cqi;
+  display: flex; justify-content: space-between; align-items: flex-start;
   font-family: var(--font-head);
-  font-size: 15vw;
+  font-size: 17.2cqi;
   font-weight: 700;
-  line-height: 1;
+  letter-spacing: -0.02em;
+  line-height: 0.8;
   white-space: nowrap;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(29,74,53,0.22);
+  -webkit-text-stroke: 1.2px rgba(29,74,53,0.30);
   pointer-events: none; user-select: none;
   z-index: 0;
   opacity: 0;
-  animation: riseUp 1.8s var(--ease) 0.1s forwards;
+  animation: fadeIn 1.6s var(--ease) 0.2s forwards;
+}
+.banner-bg-text span { display: inline-block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* two avatars side by side, bottoms aligned to the banner's bottom edge */
+.banner-avatars {
+  position: relative; z-index: 2;
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: clamp(0.5rem, 3vw, 2.25rem);
+  height: var(--avatar-h);
+  padding-top: 0;
+}
+.banner-avatar {
+  position: relative;
+  height: 100%;
+  display: flex; align-items: flex-end;
+  opacity: 0;
+  animation: popUp 1.25s cubic-bezier(0.34, 1.36, 0.64, 1) forwards;
+}
+.banner-avatar--a { animation-delay: 0.35s; }
+.banner-avatar--b { animation-delay: 0.6s; }
+/* the avatar is clipped by the banner, so the pop-up starts from inside it */
+@keyframes popUp {
+  from { opacity: 0; transform: translateY(105%) scale(0.92); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.banner-avatar {
-  position: relative; z-index: 2;
-  left: var(--avatar-x);
-  top: var(--avatar-y);
-  width: var(--avatar-w);
-  aspect-ratio: 1 / 1;
-  /* pull the lower half of the avatar out of the banner */
-  margin-bottom: calc(var(--avatar-w) * -0.5);
-  opacity: 0;
-  animation: riseUp 1.4s var(--ease) 0.35s forwards;
-}
-/* soft light glow where the avatar's lower edge meets the page, so it blends instead of looking cut off */
-.banner-avatar::after {
-  content: '';
-  position: absolute;
-  left: 6%; right: 6%; bottom: -4%;
-  height: 16%;
-  background: radial-gradient(ellipse at center, rgba(246,241,231,0.95) 0%, rgba(246,241,231,0.45) 45%, rgba(246,241,231,0) 72%);
-  filter: blur(6px);
-  pointer-events: none;
-  z-index: -1;
-}
 .avatar-glow {
-  position: absolute; inset: -6%;
+  position: absolute; inset: 8% -6% 4%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(242,70,46,0.35) 0%, rgba(242,70,46,0) 65%);
-  filter: blur(6px);
+  background: radial-gradient(circle, rgba(242,70,46,0.28) 0%, rgba(242,70,46,0) 65%);
+  filter: blur(8px);
   animation: pulse 5s ease-in-out infinite;
   z-index: 0;
+  pointer-events: none;
 }
 @keyframes pulse {
   0%, 100% { transform: scale(1); opacity: 0.75; }
-  50%      { transform: scale(1.08); opacity: 1; }
-}
-.avatar-float {
-  position: relative; z-index: 1;
-  width: 100%; height: 100%;
-  animation: float 6s ease-in-out infinite;
+  50%      { transform: scale(1.06); opacity: 1; }
 }
 .avatar-img {
-  width: 100%; height: 100%;
-  object-fit: contain; display: block;
-  filter: drop-shadow(0 34px 40px rgba(18,48,35,0.38));
+  position: relative; z-index: 1;
+  height: 100%; width: auto;
+  max-width: none;
+  display: block;
+  object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 26px 30px rgba(18,48,35,0.32));
   transition: transform 0.8s var(--ease), filter 0.8s var(--ease);
 }
 .banner-avatar:hover .avatar-img {
-  transform: scale(1.03) rotate(-1.5deg);
-  filter: drop-shadow(0 40px 48px rgba(18,48,35,0.45));
+  transform: translateY(-6px);
+  filter: drop-shadow(0 34px 36px rgba(18,48,35,0.4));
 }
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-14px); }
-}
+.banner-avatar--b .avatar-img { height: 92%; }
 
 /* scroll cue */
 .scroll-cue {
@@ -252,7 +254,7 @@ body {
    ============================================= */
 .intro {
   position: relative; z-index: 1;
-  padding: calc(var(--avatar-w) * 0.5 + 3.5rem) 1.75rem 6rem;
+  padding: 5rem 1.75rem 6rem;
 }
 .intro-inner {
   max-width: 1200px; margin: 0 auto;
@@ -606,13 +608,16 @@ body {
   .scroll-cue { display: none; }
 }
 
-/* phones */
+/* phones: the banner shrinks to its avatars, with no empty space above or below */
 @media (max-width: 760px) {
   .section { padding: 5.5rem 1.25rem; }
   #skills { padding: 5.5rem 0; }
-  .banner { padding: 100px 1rem 0; min-height: 90svh; }
-  :root { --avatar-w: min(90vw, 440px, 62svh); --avatar-x: 0; --avatar-y: -3svh; }
-  .intro { padding: calc(var(--avatar-w) * 0.5 + 2.5rem) 1.25rem 5rem; }
+  .banner { margin: 68px 0 0; }
+  :root { --avatar-h: min(300px, 40svh); }
+  .banner-bg-text { top: 1.6cqi; left: 3cqi; right: 3cqi; }
+  .banner-avatars { gap: 0.25rem; }
+  .banner-avatar--b { margin-left: -0.9rem; }
+  .intro { padding: 3.5rem 1.25rem 5rem; }
   .about-text { padding: 2rem 1.5rem; }
 }
 
@@ -620,13 +625,13 @@ body {
   .hero-name { font-size: 3.1rem; }
   .photo-stage { width: min(84vw, 340px); }
   .btn-main, .btn-line { padding: 0.8rem 1.4rem; font-size: 14px; }
-  :root { --avatar-w: min(90vw, 380px, 56svh); --avatar-x: 0; --avatar-y: -2svh; }
+  :root { --avatar-h: min(262px, 36svh); }
 }
 
 /* very short / landscape phones: keep the banner from overflowing */
 @media (max-height: 560px) and (orientation: landscape) {
-  .banner { min-height: auto; padding: 90px 1rem 0; }
-  :root { --avatar-w: min(60vh, 320px); --avatar-x: 0; --avatar-y: 0; }
+  .banner { margin-top: 70px; }
+  :root { --avatar-h: min(60vh, 260px); }
   .scroll-cue { display: none; }
 }
 
