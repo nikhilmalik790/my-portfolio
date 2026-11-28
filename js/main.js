@@ -106,6 +106,96 @@ function typeWriter() {
 typeWriter();
 
 /* ---- NAVBAR SCROLL ---- */
+const themeRoot = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const useInk = new URLSearchParams(window.location.search).get('gl') !== '0';
+let themeTransition;
+
+function setTheme(dark) {
+  if (dark) themeRoot.dataset.theme = 'dark';
+  else delete themeRoot.dataset.theme;
+  themeToggle.setAttribute('aria-pressed', String(dark));
+}
+
+setTheme(themeRoot.dataset.theme === 'dark');
+
+themeToggle.addEventListener('click', async event => {
+  const dark = themeToggle.getAttribute('aria-pressed') !== 'true';
+  themeToggle.setAttribute('aria-pressed', String(dark));
+  try {
+    localStorage.setItem('portfolio-theme', dark ? 'dark' : 'light');
+  } catch {}
+
+  if (themeTransition) {
+    themeTransition.skipTransition();
+    setTheme(dark);
+    return;
+  }
+
+  const canTransition = document.startViewTransition && !reducedMotion.matches;
+  if (!canTransition) {
+    setTheme(dark);
+    return;
+  }
+
+  const button = themeToggle.getBoundingClientRect();
+  const x = event.detail ? event.clientX : button.left + button.width / 2;
+  const y = event.detail ? event.clientY : button.top + button.height / 2;
+  const radius = Math.hypot(
+    Math.max(x, document.documentElement.clientWidth - x),
+    Math.max(y, document.documentElement.clientHeight - y)
+  ) * 1.5;
+
+  if (useInk) themeRoot.classList.add('ink-transition');
+  const transition = document.startViewTransition(() => {
+    setTheme(themeToggle.getAttribute('aria-pressed') === 'true');
+  });
+  themeTransition = transition;
+
+  try {
+    await transition.ready;
+    if (useInk) {
+      // Shift the lobes as the front grows, then smooth the edge with cubic curves.
+      const seed = Math.random() * Math.PI * 2;
+      const pointCount = 48;
+      const coordinates = point => point.map(value => value.toFixed(1)).join(' ');
+      const frames = Array.from({ length: 6 }, (_, frame) => {
+        const growth = frame / 5;
+        const points = Array.from({ length: pointCount }, (_, index) => {
+          const angle = index * 2 * Math.PI / pointCount;
+          const edge = 1 + 0.14 * Math.sin(angle * 5 + seed - growth * 2)
+            + 0.08 * Math.cos(angle * 9 - seed + growth * 3)
+            + 0.036 * Math.sin(angle * 17 + seed + growth * 4);
+          const distance = growth * radius * edge;
+          return [x + Math.cos(angle) * distance, y + Math.sin(angle) * distance];
+        });
+        const curves = points.map((point, index) => {
+          const previous = points[(index + pointCount - 1) % pointCount];
+          const next = points[(index + 1) % pointCount];
+          const after = points[(index + 2) % pointCount];
+          const outgoing = point.map((value, axis) => value + (next[axis] - previous[axis]) / 6);
+          const incoming = next.map((value, axis) => value - (after[axis] - point[axis]) / 6);
+          return `C ${coordinates(outgoing)} ${coordinates(incoming)} ${coordinates(next)}`;
+        });
+        return { clipPath: `path("M ${coordinates(points[0])} ${curves.join(' ')} Z")` };
+      });
+
+      themeRoot.animate(frames, {
+        duration: 950,
+        easing: 'cubic-bezier(0.42, 0.06, 0.35, 1)',
+        pseudoElement: '::view-transition-new(root)'
+      });
+    }
+  } catch {
+    transition.skipTransition();
+  } finally {
+    await transition.finished;
+    themeRoot.classList.remove('ink-transition');
+    themeTransition = undefined;
+  }
+});
+
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 30);

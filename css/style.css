@@ -37,6 +37,53 @@
 
 html { scroll-behavior: smooth; }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --oat:          #141C18;
+  --oat-light:    #202C25;
+  --oat-deep:     #2A3A30;
+  --forest:       #C6DEC8;
+  --forest-deep:  #0D1711;
+  --forest-soft:  #A4C5AF;
+  --tomato:       #FF806B;
+  --tomato-deep:  #FF9A88;
+  --ink-2:        #B1C5B6;
+  --line:         rgba(198,222,200,0.22);
+  --shadow-soft:  0 18px 40px -18px rgba(0,0,0,0.55);
+}
+
+.nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+.theme-toggle {
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: var(--surface); color: var(--ink);
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--ink); }
+.theme-toggle:focus-visible { outline: 2px solid var(--tomato); outline-offset: 3px; }
+.theme-toggle svg { width: 20px; height: 20px; }
+.theme-toggle .theme-sun,
+[data-theme="dark"] .theme-toggle .theme-moon { display: none; }
+[data-theme="dark"] .theme-toggle .theme-sun { display: block; }
+
+[data-theme="dark"] #navbar.scrolled { background: rgba(20,28,24,0.94); }
+[data-theme="dark"] .mobile-menu { background: rgba(20,28,24,0.98); }
+[data-theme="dark"] .banner-bg-text { -webkit-text-stroke-color: rgba(198,222,200,0.34); }
+[data-theme="dark"] #skills,
+[data-theme="dark"] #contact { --forest: #1B3528; --oat: #E5EDDF; --oat-light: #F3F5EB; }
+[data-theme="dark"] .sk:hover { color: #182219; }
+[data-theme="dark"] .pcard { box-shadow: var(--shadow-soft); }
+[data-theme="dark"] .pcard:hover { border-color: var(--forest-soft); }
+
+html.ink-transition::view-transition { pointer-events: none; }
+html.ink-transition *, html.ink-transition *::before, html.ink-transition *::after {
+  transition-duration: 0s !important;
+}
+html.ink-transition::view-transition-group(root) { animation: none; }
+html.ink-transition::view-transition-old(root),
+html.ink-transition::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
 body {
   font-family: var(--font-body);
   background: var(--oat);
@@ -354,6 +401,10 @@ body {
   display: block;
   width: 100%; height: auto;
   object-fit: contain;
+}
+
+[data-theme="dark"] .photo-img {
+  filter: brightness(0.86) contrast(1.06) saturate(0.86) sepia(0.14);
 }
 
 /* =============================================
